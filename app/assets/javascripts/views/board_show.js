@@ -3,11 +3,13 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 	
 	initialize: function () {
 		this.model.lists().fetch();
-		this.listenTo(this.model.lists(), "add sync", this.render);
+		this.listenTo(this.model.lists(), "sync add remove", this.render)
+		// this.listenTo(this.model.lists(), "add", this.addList);
+		// this.listenTo(this.model.lists(), "remove", this.removeList)
 	},
 	
 	events: {
-		"click .addList" : "addList"
+		"click .addList" : "createList",
 	},
 	
 	render: function () {
@@ -58,7 +60,24 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
       }, this);
     },
 	
-	addList: function() {
+	// addList: function () {
+	// 	console.log("Hi")
+	// },
+	
+	createList: function() {
+		//         //create the subview
+		// var view = new Trellino.Views.ListShow({
+		//           model: list
+		//         });
+		// 
+		// //fill out the subview
+		//         this.addSubView('#lists', view);
+		// 
+		// //render the subview
+		// view.render();
+		//       }
+		
+		
 		var listTitle = this.$(".add-list").val();
 		this.model.lists().create({
 			title: listTitle,
@@ -66,6 +85,15 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 			rank: this.model.lists().length+1
 		});
 	},
+	
+	removeList: function(list) {
+		var listShowView = _(this.subviews()["#lists"]).find(function(subview) {
+			return subview.model == list;
+			    });
+		console.log(listShowView.model)
+		this.removeSubView("#lists", listShowView);
+		this.render()
+	}
 	
     // _realignBoard: function ($ul) {
   //     var listItems = $ul.find('li');

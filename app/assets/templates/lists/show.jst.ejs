@@ -1,9 +1,7 @@
-<h2 class="list_title"> <%= list.escape('title') %> </h2>
-<button>Delete List</button>
+<li class="list_title"> <%= list.escape('title') %> </li>
+<button class="deleteList">Delete List</button>
 <ul class="cards">
-<% list.cards().each(function(card) { %>
-	<li class="card_title"><%= card.escape('title') %>
-<% }) %>
+
 </ul>
 <input class="add-card" name="card[title]" type="text">
 <button class="addCard"> Add Card </button>

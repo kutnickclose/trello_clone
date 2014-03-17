@@ -1,8 +1,14 @@
-<h1> Board INDEX </h1>
+<h1> My Boards </h1>
+<div class="row">
   <% boards.each(function(board) { %>
-      <a href="#/boards/<%= board.escape('id') %>">
-        <h3><%= board.escape('title') %></h3>
-      </a>
+	 <a href="#/boards/<%= board.escape('id') %>">
+	   <div class="boardItem">
+	       <p class="deleteBoard">X</p>
+		   <h3 class="whitetext"><%= board.escape('title') %></h3>
+	   </div>
+	 </a>
   <% }) %>
-  <input class= 'add-board' type="text" name="board[title]">
-  <button class="addBoard">Add Board</button>
+</div>
+
+<input class= 'add-board' type="text" name="board[title]">
+<button class="addBoard">Add Board</button>

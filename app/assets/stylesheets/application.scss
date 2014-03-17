@@ -15,3 +15,28 @@
  */
 
 @import "bootstrap";
+
+.list_title {
+	font-size: 3em;
+}
+
+.whitetext {
+	color: white;
+}
+
+.boardItem {
+	float: left;
+	background-color: rgba(41, 128, 185,1.0);
+	width: 300px;
+	color: white;
+	padding: 1%;
+	padding-bottom: 50px;
+	margin: 1%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.deleteBoard {
+	text-align: right;
+	vertical-align: top;
+}

@@ -6,10 +6,12 @@ window.Trellino.Views.BoardIndexView = Backbone.View.extend({
   },
 
   events: {
-    'click .addBoard': 'add'
+    'click .addBoard': 'add',
+	"click .deleteBoard" : 'delete'
   },
 
   render: function() {
+	  // this.renderBoards()
     var content = this.template({ boards: this.collection });
     this.$el.html(content);
     return this;
@@ -21,5 +23,10 @@ window.Trellino.Views.BoardIndexView = Backbone.View.extend({
     this.collection.create({
       title: boardTitle
     });
+  },
+  
+  delete: function(event) {
+	  console.log(event)
+	  console.log("ddelte board")
   }
 });

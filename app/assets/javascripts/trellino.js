@@ -7,7 +7,6 @@ window.Trellino = {
     Trellino.boards = new Trellino.Collections.Boards();
     Trellino.boards.fetch({
       success: function(boards) {
-		console.log("hello?")
         new Trellino.Routers.AppRouter({
           $rootEl: $('#content'),
 		  boards: Trellino.boards
