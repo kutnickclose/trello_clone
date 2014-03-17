@@ -20,8 +20,17 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 		this.renderLists();
 		
 		this.$("#lists").sortable({
-			
+		  // tolerance: 'pointer',
+	      // start: function (event, ui) {
+	      //   $(ui.item).toggleClass('dragged');
+	      // },
+	      // stop: function (event, ui) {
+	      //   $(ui.item).toggleClass('dragged');
+	      //   that._realignBoard($(event.target));
+	      // }
 		});
+		
+		this.$(".cards").sortable({})
 		
 	    // this.$('ul.list_list').sortable({
 	    //   tolerance: 'pointer',
@@ -58,22 +67,22 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 		});
 	},
 	
-    _realignBoard: function ($ul) {
-      var listItems = $ul.find('li');
-
-      var rankIndex = 1;
-      $(listItems).each(function (index, item) {
-        if ($(item).hasClass('list_entry')) {
-          var list = Trellino.lists.get($(item).data('id'));
-          list.set({
-            rank: rankIndex
-          });
-          list.save({
-            silent: true
-          });
-          rankIndex++;
-        }
-      });
-    }
+    // _realignBoard: function ($ul) {
+  //     var listItems = $ul.find('li');
+  // 
+  //     var rankIndex = 1;
+  //     $(listItems).each(function (index, item) {
+  //       if ($(item).hasClass('list_entry')) {
+  //         var list = Trellino.lists.get($(item).data('id'));
+  //         list.set({
+  //           rank: rankIndex
+  //         });
+  //         list.save({
+  //           silent: true
+  //         });
+  //         rankIndex++;
+  //       }
+  //     });
+    // }
 	
 })

@@ -2,7 +2,8 @@ window.Trellino.Views.ListShow = Backbone.View.extend({
 	template: JST["lists/show"],
 	
 	events: {
-		"click .addCard" : "addCard"
+		"click .addCard" : "addCard",
+		"click .deleteList" : "deleteList"
 	},
 	
 	initialize: function() {
@@ -15,6 +16,7 @@ window.Trellino.Views.ListShow = Backbone.View.extend({
 			list: this.model,
 		})
 		this.$el.html(content)
+			
 		return this
 	},
 	
@@ -26,6 +28,10 @@ window.Trellino.Views.ListShow = Backbone.View.extend({
 			rank: this.model.cards().length + 1,
 			list_id: this.model.id
 		});
+	},
+	
+	deleteList: function() {
+		
 	}
 	
 })
