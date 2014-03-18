@@ -3,6 +3,7 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 	
 	initialize: function () {
 		this.model.lists().fetch();
+		this.listenTo(this.model, "sync add remove", this.render)
 		this.listenTo(this.model.lists(), "sync add remove", this.render)
 		// this.listenTo(this.model.lists(), "add", this.addList);
 		// this.listenTo(this.model.lists(), "remove", this.removeList)
@@ -10,6 +11,7 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 	
 	events: {
 		"click .addList" : "createList",
+		"click .deleteBoard" : "deleteBoard"
 	},
 	
 	render: function () {
@@ -20,33 +22,6 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 		this.$el.html(renderedContent)
 		
 		this.renderLists();
-		
-		this.$("#lists").sortable({
-		  // tolerance: 'pointer',
-	      // start: function (event, ui) {
-	      //   $(ui.item).toggleClass('dragged');
-	      // },
-	      // stop: function (event, ui) {
-	      //   $(ui.item).toggleClass('dragged');
-	      //   that._realignBoard($(event.target));
-	      // }
-		});
-		
-		this.$(".cards").sortable({})
-		
-	    // this.$('ul.list_list').sortable({
-	    //   tolerance: 'pointer',
-	    //   start: function (event, ui) {
-	    //     $(ui.item).toggleClass('dragged');
-	    //   },
-	    //   stop: function (event, ui) {
-	    //     $(ui.item).toggleClass('dragged');
-	    //     that._realignBoard($(event.target));
-	    //   }
-	    // });
-	    // 
-	    // var flexwidth = (this.collection.length > 1 ? 270 * this.collection.length : 280);
-	    // this.$el.find('#list_index').outerWidth(flexwidth);
 		
 		return this
 	},
@@ -60,24 +35,7 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
       }, this);
     },
 	
-	// addList: function () {
-	// 	console.log("Hi")
-	// },
-	
-	createList: function() {
-		//         //create the subview
-		// var view = new Trellino.Views.ListShow({
-		//           model: list
-		//         });
-		// 
-		// //fill out the subview
-		//         this.addSubView('#lists', view);
-		// 
-		// //render the subview
-		// view.render();
-		//       }
-		
-		
+	createList: function() {		
 		var listTitle = this.$(".add-list").val();
 		this.model.lists().create({
 			title: listTitle,
@@ -93,24 +51,18 @@ window.Trellino.Views.BoardShowView = Backbone.CompositeView.extend({
 		console.log(listShowView.model)
 		this.removeSubView("#lists", listShowView);
 		this.render()
-	}
+	},
 	
-    // _realignBoard: function ($ul) {
-  //     var listItems = $ul.find('li');
-  // 
-  //     var rankIndex = 1;
-  //     $(listItems).each(function (index, item) {
-  //       if ($(item).hasClass('list_entry')) {
-  //         var list = Trellino.lists.get($(item).data('id'));
-  //         list.set({
-  //           rank: rankIndex
-  //         });
-  //         list.save({
-  //           silent: true
-  //         });
-  //         rankIndex++;
-  //       }
-  //     });
-    // }
+	
+	///test if realign board works
+	
+	deleteBoard: function(){
+		this.remove();
+		this.model.destroy({
+			success: function() {
+			  Backbone.history.navigate('#', {trigger: true})
+			}
+		});
+	}
 	
 })

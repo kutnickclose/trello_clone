@@ -11,9 +11,11 @@ window.Trellino.Views.BoardIndexView = Backbone.View.extend({
   },
 
   render: function() {
-	  // this.renderBoards()
-    var content = this.template({ boards: this.collection });
+	var content = this.template({ boards: this.collection });
     this.$el.html(content);
+	
+	// this.renderBoards()
+	
     return this;
   },
 
@@ -25,8 +27,16 @@ window.Trellino.Views.BoardIndexView = Backbone.View.extend({
     });
   },
   
-  delete: function(event) {
-	  console.log(event)
+  // renderBoards : function() {
+  // 	  this.collection.each(function(board) {
+  // 		  var boardView = new Trellino.Views.BoardShowView({
+  // 			  model: board
+  // 		  });
+  // 		  this.addSubView('.boards', view.render());
+  // 	  }, this);
+  // },
+  
+  delete: function() {
 	  console.log("ddelte board")
   }
 });

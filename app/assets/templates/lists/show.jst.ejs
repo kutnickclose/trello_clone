@@ -1,7 +1,11 @@
-<li class="list_title"> <%= list.escape('title') %> </li>
-<button class="deleteList">Delete List</button>
-<ul class="cards">
+<div class="list-container">
+	<button class="deleteList">X</button>
+	<h3 class="list_title"> <%= list.escape('title') %> </h3>
 
-</ul>
-<input class="add-card" name="card[title]" type="text">
-<button class="addCard"> Add Card </button>
+	<ul class="cards">
+
+	</ul>
+
+	<input class="add-card turnblue" name="card[title]" type="text">
+	<button class="addCard turnblue"> Add Card </button>
+<div>

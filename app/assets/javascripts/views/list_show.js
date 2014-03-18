@@ -9,7 +9,7 @@ window.Trellino.Views.ListShow = Backbone.CompositeView.extend({
 	
 	initialize: function() {
 		this.listenTo(this.model, "add sync", this.render);
-		this.listenTo(this.model.cards(), "add sync remove", this.render);
+		this.listenTo(this.model.cards(), "add remove sync change:rank", this.render);
 	},
 	
 	render: function() {
@@ -19,9 +19,37 @@ window.Trellino.Views.ListShow = Backbone.CompositeView.extend({
 		this.$el.html(content);
 		
 		this.renderCards();
+		
+		var that = this
+		this.$(".cards").sortable({
+			cursor: "move",
+			opacity: 0.3,
+			connectWith: ".cards",
+  	      stop: function (event) {
+  	        that._realignCard($(event.target));
+  	      }
+		});
 			
 		return this
 	},
+	
+    _realignCard: function ($ul) {
+		var listCards = $ul.find('h4');
+	  
+		var that = this
+		var rankNum= 1;
+	  
+		$(listCards).each(function (index, item) {
+			if ($(item).hasClass('card_title')) {
+				var card = that.model.cards().get($(item).data('id'));
+				card.set({
+					rank: rankNum
+				});
+				card.save();
+				rankNum++;
+			}
+		});
+    },
 	
 	addCard: function() {
 		var cardTitle = this.$(".add-card").val();
@@ -38,6 +66,7 @@ window.Trellino.Views.ListShow = Backbone.CompositeView.extend({
 	},
 	
 	renderCards: function() {
+		this.model.cards().sort();
         this.model.cards().each(function (card) {
           var view = new Trellino.Views.CardShow({
             model: card

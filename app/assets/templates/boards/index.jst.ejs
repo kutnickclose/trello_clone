@@ -1,14 +1,14 @@
 <h1> My Boards </h1>
-<div class="row">
-  <% boards.each(function(board) { %>
-	 <a href="#/boards/<%= board.escape('id') %>">
-	   <div class="boardItem">
-	       <p class="deleteBoard">X</p>
-		   <h3 class="whitetext"><%= board.escape('title') %></h3>
-	   </div>
-	 </a>
-  <% }) %>
-</div>
+<p class="addListContainer">
+	<input class= 'add-board' type="text" name="board[title]">
+	<button class="addBoard">Add Board</button>
+</p>
 
-<input class= 'add-board' type="text" name="board[title]">
-<button class="addBoard">Add Board</button>
+<% boards.each(function(board) { %>
+ <a href="#/boards/<%= board.escape('id') %>">
+   <div class="boardItem">
+       <p class="deleteBoard">X</p>
+	   <h3 class="whitetext"><%= board.escape('title') %></h3>
+   </div>
+ </a>
+<% }) %>

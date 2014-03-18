@@ -1,7 +1,11 @@
-<h1> Board Title: <%= board.escape('title') %> </h1>
+<a href="#">back to my boards</a>
 
-<input class= 'add-list' type="text" name="list[title]">
-<button class="addList">Add List</button>
+<h1 class="turnblue"><%= board.escape('title') %> <button class="deleteBoard">X</button> </h1>
 
-<ol id="lists">
-</ol>
+<div class="addListContainer">
+	<input class= 'add-list' type="text" name="list[title]">
+	<button class="addList">Add List</button>
+</div>
+
+<h4 id="lists">
+</h4>
